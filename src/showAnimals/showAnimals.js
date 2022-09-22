@@ -18,7 +18,9 @@ function ShowAnimals() {
         console.log(animal)
       return (
         <div id={animal.id} className="animal">
-          <h1>{animal.name}</h1>
+          <h1>Name: {animal.name}</h1>
+          <p>Type: {animal.animal_type}</p>
+          <p>Lifespan: {animal.lifespan}</p>
           <img src={animal.image_link} alt={animal.name} className="image" />
         </div>
       );
