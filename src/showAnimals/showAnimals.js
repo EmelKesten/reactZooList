@@ -16,9 +16,9 @@ function ShowAnimals() {
     return animals.map((animal) => {
       return (
         <div className="animal" key={animal.id}>
-          <h1>Name: {animal.name}</h1>
-          <p>Type: {animal.animal_type}</p>
-          <p>Lifespan: {animal.lifespan}</p>
+          <h1>Name: <span className="spany">{animal.name}</span></h1>
+          <p>Type: <span className="spany">{animal.animal_type}</span></p>
+          <p>Lifespan: <span className="spany">{animal.lifespan}</span></p>
           <img src={animal.image_link} alt={animal.name} className="image" />
         </div>
       );
