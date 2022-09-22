@@ -7,9 +7,8 @@ function ShowAnimals() {
             {data && data.map((item, index) => {
                 return (
                     <div key={index}>
-                        <p>{item.name}</p>
-                        <p>{item.species}</p>
-                        <p>{item.age}</p>
+                        <h1>{item.name}</h1>
+                        <p>{item.animal_type}</p>
                     </div>
                 )
             })}
