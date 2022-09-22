@@ -1,21 +1,29 @@
 import { useSelector } from "react-redux/es/exports";
+import { useDispatch } from "react-redux/es/exports";
+import { fetchData } from "../userState/User";
+import { useEffect } from "react";
 
 function ShowAnimals() {
-    const data = useSelector(state => state.user.user.fetchData);
-    return (
-        <div>
-            {data && data.map((item, index) => {
-                return (
-                    <div key={index}>
-                        <h1>{item.name}</h1>
-                        <p>{item.animal_type}</p>
-                    </div>
-                )
-            })}
+  const data = useSelector((state) => state.user.user.fetchData);
+  const loading = useSelector((state) => state.user.user.loading);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchData());
+  }, []);
+
+  if (loading) {
+    return <img src={require("../loading.gif")} alt=""></img>;
+  } else {
+    return data.map((animal) => {
+        console.log(animal)
+      return (
+        <div id={animal.id} className="animal">
+          <h1>{animal.name}</h1>
+          <img src={animal.image_link} alt={animal.name} className="image" />
         </div>
-    )
-
+      );
+    });
+  }
 }
-
 
 export default ShowAnimals;
