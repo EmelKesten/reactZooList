@@ -1,11 +1,10 @@
 import { useSelector } from "react-redux/es/exports";
 import { useDispatch } from "react-redux/es/exports";
-import { fetchData } from "../userState/User";
+import { fetchData } from "../userState/animalsSlice";
 import { useEffect } from "react";
 
 function ShowAnimals() {
-  const data = useSelector((state) => state.user.user.fetchData);
-  const loading = useSelector((state) => state.user.user.loading);
+  const { animals, loading } = useSelector((state) => state.animals.appData);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchData());
@@ -14,10 +13,9 @@ function ShowAnimals() {
   if (loading) {
     return <img src={require("../loading.gif")} alt=""></img>;
   } else {
-    return data.map((animal) => {
-        console.log(animal)
+    return animals.map((animal) => {
       return (
-        <div id={animal.id} className="animal">
+        <div className="animal" key={animal.id}>
           <h1>Name: {animal.name}</h1>
           <p>Type: {animal.animal_type}</p>
           <p>Lifespan: {animal.lifespan}</p>

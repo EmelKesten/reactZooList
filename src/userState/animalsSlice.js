@@ -2,9 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchData = createAsyncThunk("animals", () => {
-  return axios.get("https://zoo-animal-api.herokuapp.com/animals/rand/10")
+  return axios
+    .get("https://zoo-animal-api.herokuapp.com/animals/rand/10")
     .then((response) => {
-      return {response};
+      return { response };
     })
     .catch((error) => {
       console.log(error);
@@ -12,27 +13,27 @@ export const fetchData = createAsyncThunk("animals", () => {
 });
 
 export const initialState = {
-  user: {
-    fetchData: [],
+  appData: {
+    animals: [],
     loading: true,
   },
 };
 
 export const userSlice = createSlice({
-  name: "user",
+  name: "animals",
   initialState,
   reducers: {
     addData: (state, action) => {
-      state.user.fetchData = action.payload;
+      state.appData.animals = action.payload;
     },
     setLoader: (state, action) => {
-      state.user.loading = action.payload;
-    }
+      state.appData.loading = action.payload;
+    },
   },
   extraReducers: {
     [fetchData.fulfilled]: (state, action) => {
-      state.user.fetchData = action.payload.response.data;
-      state.user.loading = false;
+      state.appData.animals = action.payload.response.data;
+      state.appData.loading = false;
     },
   },
 });
